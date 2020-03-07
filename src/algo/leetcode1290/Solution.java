@@ -1,4 +1,4 @@
-package easy.leetcode1290;
+package algo.leetcode1290;
 /**
  * Definition for singly-linked list.
  * public class ListNode {

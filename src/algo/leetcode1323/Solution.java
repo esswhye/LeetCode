@@ -1,4 +1,4 @@
-package easy.leetcode1323;
+package algo.leetcode1323;
 
 public class Solution {
     public static void main(String[] args) {

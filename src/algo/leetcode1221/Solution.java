@@ -1,4 +1,4 @@
-package easy.leetcode1221;
+package algo.leetcode1221;
 
 
 

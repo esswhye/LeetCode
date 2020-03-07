@@ -1,4 +1,4 @@
-package easy.leetcode1351;
+package algo.leetcode1351;
 
 public class Solution {
 

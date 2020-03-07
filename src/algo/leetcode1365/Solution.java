@@ -1,8 +1,6 @@
-package easy.leetcode1365;
+package algo.leetcode1365;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Solution {
     public static void main(String[] args) {

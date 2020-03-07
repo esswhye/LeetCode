@@ -1,4 +1,4 @@
-package easy.leetcode1281;
+package algo.leetcode1281;
 
 //Given an integer number n, return the difference between the product of its digits and the sum of its digits.
 //

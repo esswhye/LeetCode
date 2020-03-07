@@ -1,4 +1,4 @@
-package easy.leetcode202;
+package algo.leetcode202;
 
 import java.util.HashSet;
 import java.util.Set;
