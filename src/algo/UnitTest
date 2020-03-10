@@ -1,0 +1,29 @@
+@BeforeEach
+    public void init() {
+        this.nUniqueIntegersSumToZero = new NUniqueIntegersSumToZero();
+    }
+
+    @Test
+    public void firstTest() {
+        int[] expected = new int[]{0, 2, -2, 1, -1};
+        int[] actualResult = nUniqueIntegersSumToZero.sumZero(5);
+        MasterPrinter.printArray(actualResult);
+        Assertions.assertArrayEquals(actualResult, expected);
+    }
+
+    @Test
+    public void secondTest() {
+        int[] expected = new int[]{0, 1, -1};
+        int[] actualResult = nUniqueIntegersSumToZero.sumZero(3);
+        MasterPrinter.printArray(actualResult);
+        Assertions.assertArrayEquals(actualResult, expected);
+    }
+
+    @Test
+    public void thirdTest() {
+        int[] expected = new int[]{0};
+        int[] actualResult = nUniqueIntegersSumToZero.sumZero(1);
+        MasterPrinter.printArray(actualResult);
+        MasterPrinter.printArray(actualResult);
+        Assertions.assertArrayEquals(actualResult, expected);
+    }
