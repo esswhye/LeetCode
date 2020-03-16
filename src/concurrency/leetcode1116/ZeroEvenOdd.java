@@ -1,5 +1,6 @@
 package concurrency.leetcode1116;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntConsumer;
 
 class ZeroEvenOdd {
@@ -39,6 +40,7 @@ class ZeroEvenOdd {
             even = false;
             notifyAll();
         }
+
     }
 
     public synchronized void odd(IntConsumer printNumber) throws InterruptedException {
