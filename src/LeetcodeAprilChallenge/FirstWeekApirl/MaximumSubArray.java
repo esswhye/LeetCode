@@ -11,12 +11,18 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 Follow up:
 
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+53
  */
 
 public class MaximumSubArray {
 
     public static void main(String[] args) {
-        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4, -10, 100}));
+
+        int[] array = new int[] {-2, 1, -3, 4, -1, 2, 1, -5, 4, -10, 100};
+        int max = maxSubArrayDivideConquer(array,0,array.length-1);
+        System.out.println(max);
+
     }
 
     public static int maxSubArray(int[] nums) {
@@ -67,6 +73,58 @@ public class MaximumSubArray {
             max = Math.max(max, sum);
         }
         return max;
+    }
+
+    public static int maxSubArrayDivideConquer(int[] nums, int l, int r) {
+        //Base
+        if (l == r) {
+            return nums[l];
+        }
+        //Find mid
+        int m = (l + r) / 2;
+
+        //Break them into sub
+        int maxLeft = maxSubArrayDivideConquer(nums, l, m);
+        int maxRight = maxSubArrayDivideConquer(nums, m + 1, r);
+
+        //Solve the problem
+        int maxCross = maxSubCrossingSum(nums, l, m, r);
+        return Math.max(Math.max(maxLeft, maxRight), maxCross);
+    }
+
+    public static int maxSubCrossingSum(int[] nums, int l, int m, int r) {
+
+
+        //Mid to Left << --- |
+
+        int maxLeft = Integer.MIN_VALUE, sum = 0;
+
+        for (int i = m; i >= l; i--) {
+            sum += nums[i];
+            if (sum > maxLeft) {
+                maxLeft = sum;
+            }
+        }
+
+        //Mid to Right | -- >>
+
+        int maxRight = Integer.MIN_VALUE;
+        sum = 0;
+
+        for (int i = m + 1; i <= r; i++) {
+            sum += nums[i];
+            if (sum > maxRight) {
+                maxRight = sum;
+            }
+        }
+
+        int cross = maxLeft + maxRight;
+        int maxLeftOrRight = Math.max(maxLeft, maxRight);
+
+
+        return  Math.max(cross,maxLeftOrRight);
+
+
     }
 
 }
