@@ -30,7 +30,7 @@ public class HammingDistance {
 
     public static int hammingDistance(int x, int y) {
 
-
+        //XOR
         int number = x ^ y;
         int distance = 0;
 
