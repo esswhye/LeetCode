@@ -19,8 +19,8 @@ public class MaximumSubArray {
     public static void main(String[] args) {
         System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4, -10, 100}));
 
-        int[] array = new int[] {-2, 1, -3, 4, -1, 2, 1, -5, 4, -10, 100};
-        int max = maxSubArrayDivideConquer(array,0,array.length-1);
+        int[] array = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4, -10, 100};
+        int max = maxSubArrayDivideConquer(array, 0, array.length - 1);
         System.out.println(max);
 
     }
@@ -117,12 +117,14 @@ public class MaximumSubArray {
                 maxRight = sum;
             }
         }
-
+        //Sum of Mid cross   _<<  +  >>_
         int cross = maxLeft + maxRight;
+
+        //Left or Right
         int maxLeftOrRight = Math.max(maxLeft, maxRight);
 
 
-        return  Math.max(cross,maxLeftOrRight);
+        return Math.max(cross, maxLeftOrRight);
 
 
     }
