@@ -15,10 +15,15 @@ public class FlattenAMultiLevelList {
 
     public static void main(String[] args) {
 
-        Node node = new Node(5);
-        node.next = new Node(4);
+        Node node = new Node(1);
+        node.next = new Node(3);
+        node.next.prev = node;
         node.child = new Node(2);
-
+        node.child.next = new Node(8);
+        node.child.next.next = new Node(7);
+        node.child.child = new Node(4);
+        node.child.child.next = new Node(5);
+        node.child.child.next.next = new Node(6);
         Node result = flatten(node);
         System.out.println("TEST");
     }
@@ -33,6 +38,7 @@ public class FlattenAMultiLevelList {
                 Node innerTail = flattenRec(child);
                 innerTail.next = next;
                 if (next != null)
+                    //avoid first node null exception
                     next.prev = innerTail;
 
                 current.next = child;
