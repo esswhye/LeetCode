@@ -1,6 +1,8 @@
 package julychallenge;
 
 
+import java.util.Stack;
+
 /*
 https://leetcode.com/explore/featured/card/july-leetcoding-challenge/545/week-2-july-8th-july-14th/3386/
 You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer,
@@ -9,6 +11,16 @@ and so on, to produce a multilevel data structure, as shown in the example below
 
 Flatten the list so that all the nodes appear in a single-level, doubly linked list. You are given the head of the first level of the list.
 
+ 1---2---3---4---5---6--NULL
+         |
+         7---8---9---10--NULL
+             |
+             11--12--NULL
+
+                    [9---10--NULL]
+             stack [4---5---6--NULL]
+         ^        2^
+ 1---2---3--- 7---8---
 
  */
 public class FlattenAMultiLevelList {
@@ -24,9 +36,58 @@ public class FlattenAMultiLevelList {
         node.child.child = new Node(4);
         node.child.child.next = new Node(5);
         node.child.child.next.next = new Node(6);
-        Node result = flatten(node);
+        //Node result = flatten(node);
+        Node result2 = flattenV2(node);
         System.out.println("TEST");
+
+        int a = 5;
+        int b = a;
+        a = 6;
+
+        System.out.println(a + b);
+
     }
+
+    /*
+    1---2---3---4---5---6--NULL
+         |
+         7---8---9---10--NULL
+             |
+             11--12--NULL
+
+                    [9---10--NULL]
+             stack [4---5---6--NULL]
+                [3---4---5---6--NULL]
+         ^        2^
+ 1---2---7---8---11---12
+     */
+    public static Node flattenV2(Node head) {
+        if (head == null)
+            return null;
+
+        Stack<Node> stack = new Stack<>();
+        //Get the first reference pointer
+        Node first = head;
+        //Inner scope
+        while (head != null) {
+            if (head.child != null) {
+                if (head.next != null)
+                    stack.push(head.next);
+                head.next = head.child;
+                head.next.prev = head;
+                head.child = null;
+            }
+            //reach the end of the linkedlist and child elemnts
+            else if (head.next == null && !stack.isEmpty()) {
+                head.next = stack.pop();
+                head.next.prev = head;
+            }
+            head = head.next;
+        }
+
+        return first;
+    }
+
 
     public static Node flattenRec(Node head) {
         Node current = head, tail = head;
