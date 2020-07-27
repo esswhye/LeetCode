@@ -28,7 +28,14 @@ Output:
 public class Subsets {
     public static void main(String[] args) {
 
-        subsets(new int[]{1, 2, 3});
+        List<List<Integer>> result = subsets(new int[]{1, 5, 3});
+        result.stream().forEach(System.out::println);
+        System.out.println(result.size());
+        int size = result.size();
+        System.out.println(size);
+        result.add(new ArrayList<>());
+        System.out.println(result.size());
+        System.out.println(size);
     }
 
     public static List<List<Integer>> subsets(int[] nums) {
@@ -37,23 +44,47 @@ public class Subsets {
             return new ArrayList<>();
         }
 
-        List<List<Integer>> result = new ArrayList<>();
-        doSubsets(nums, 0, result, new ArrayList<>());
+        List<List<Integer>> result = iterSubsets(nums);
+        List<List<Integer>> result2 = new ArrayList<>();
+        List<Integer> subSet = new ArrayList<>();
 
+        recSubsets(nums, 0, subSet, result2);
 
-        return null;
+        return result;
     }
 
-    private static void doSubsets(int[] nums, int i, List<List<Integer>> result, ArrayList<Object> list) {
-        if (i == nums.length) {
-            result.add(new ArrayList<>());
-            return;
+    private static void recSubsets(int[] nums, int pos, List<Integer> subSet, List<List<Integer>> result2) {
+
+        result2.add(new ArrayList<>(subSet));
+        for (int i = pos; i < nums.length; i++) {
+            subSet.add(nums[i]);
+            recSubsets(nums, i + 1, subSet, result2);
+
+            //backtracking
+            subSet.remove(subSet.size() - 1);
         }
-        doSubsets(nums, i + 1, result, list);
 
-        list.add(nums[i]);
-        doSubsets(nums, i + 1, result, list);
+    }
 
+    public static List<List<Integer>> iterSubsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            //get all the single digit elem
+            int size = result.size();
+
+            //loop thru single< digit elements
+            for (int j = 0; j < size; j++) {
+
+                //result.add(new ArrayList<>(result.get(j)));
+                //Initializing new Array copy instead of pointing
+                List<Integer> list = new ArrayList<>(result.get(j));
+                result.add(list);
+                result.get(result.size() - 1).add(nums[i]);
+            }
+        }
+        return result;
     }
 
 
