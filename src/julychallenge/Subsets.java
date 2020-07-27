@@ -79,10 +79,15 @@ public class Subsets {
 
                 //result.add(new ArrayList<>(result.get(j)));
                 //Initializing new Array copy instead of pointing
+                /*
+                because in line 15 ith element is taken ,so in line 17 to delete that element and proceed forwad.
+                so basically that line use to not cosider ith element
+                 */
                 List<Integer> list = new ArrayList<>(result.get(j));
                 result.add(list);
                 result.get(result.size() - 1).add(nums[i]);
             }
+
         }
         return result;
     }
