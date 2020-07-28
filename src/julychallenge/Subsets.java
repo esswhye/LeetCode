@@ -28,7 +28,7 @@ Output:
 public class Subsets {
     public static void main(String[] args) {
 
-        List<List<Integer>> result = subsets(new int[]{1, 5, 3});
+        List<List<Integer>> result = subsets(new int[]{1, 2, 3});
         result.stream().forEach(System.out::println);
         System.out.println(result.size());
         int size = result.size();
@@ -59,8 +59,9 @@ public class Subsets {
         for (int i = pos; i < nums.length; i++) {
             subSet.add(nums[i]);
             recSubsets(nums, i + 1, subSet, result2);
-
             //backtracking
+            //  because in line 60 ith element is taken ,so in line 65 to delete that element and proceed forward.
+            //                so basically that line use to not consider ith element
             subSet.remove(subSet.size() - 1);
         }
 
@@ -74,16 +75,13 @@ public class Subsets {
             //get all the single digit elem
             int size = result.size();
 
-            //loop thru single< digit elements
+            //loop thru single digit elements eg [1][2][3] not [1,2] [1,4]
             for (int j = 0; j < size; j++) {
 
                 //result.add(new ArrayList<>(result.get(j)));
                 //Initializing new Array copy instead of pointing
-                /*
-                because in line 15 ith element is taken ,so in line 17 to delete that element and proceed forwad.
-                so basically that line use to not cosider ith element
-                 */
                 List<Integer> list = new ArrayList<>(result.get(j));
+
                 result.add(list);
                 result.get(result.size() - 1).add(nums[i]);
             }
