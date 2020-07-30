@@ -29,7 +29,7 @@ public class ReverseBits {
 
     If this function is called many times, how would you optimize it?
      */
-
+    //https://www.vojtechruzicka.com/bit-manipulation-java-bitwise-bit-shift-operations/
     public static void main(String[] args) {
         int num = 43261596;
         System.out.println(reverseBitsV2(num));
@@ -72,8 +72,20 @@ public class ReverseBits {
             n = n >> 1;
             res = res << 1;
         }
-
-
         return isSigned ? res + 1 : res;
+    }
+
+    public static int reverseBitsV3(int n) {
+        int res = 0;
+
+        //Iterate thru 32 bits;
+        for (int i = 0; i < 32; i++) {
+            res = res << 1;
+            if ((n & 1) > 0)
+                res++;
+
+        }
+
+        return res;
     }
 }
