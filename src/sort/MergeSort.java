@@ -32,7 +32,6 @@ public class MergeSort {
             j++;
         }
 
-
         //leftArray = Arrays.copyOfRange(arr, 0, rightStart);
         //rightArray = Arrays.copyOfRange(arr, rightStart, n);
 
