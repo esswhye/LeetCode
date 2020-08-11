@@ -1,5 +1,8 @@
 package augchallenge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 You are given a binary tree in which each node contains an integer value.
 
@@ -28,8 +31,27 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
  */
 public class PathSumIII {
-    public static void main(String[] args) {
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    static int counter = 0;
+    static List<Integer> list = new ArrayList<>();
 
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(new int[]{5, 6, 3, 7, 1, 2, 8, 9});
+        System.out.println(pathSumV2(node, 8));
     }
 
     public int pathSum(TreeNode root, int sum) {
@@ -47,4 +69,31 @@ public class PathSumIII {
         res += pathSum2(root.right, sum - root.val);
         return res;
     }
+
+    //First 10|5|3|3 --> 10|5|3 --> 10|5 --> 10 backtracking summing 3+3|3+3+5|3+3+5|10| --> 3+5|3+5+10
+    public static int pathSumV2(TreeNode root, int sum) {
+
+        calculateSum(root, sum);
+        return counter;
+    }
+
+    private static void calculateSum(TreeNode node, int sum) {
+        if (node == null)
+            return;
+
+        list.add(node.val);
+        calculateSum(node.left, sum);
+        calculateSum(node.right, sum);
+
+        int temp = 0;
+
+        for (int i = list.size() - 1; i >= 0; i--) {
+            temp += list.get(i);
+
+            if (temp == sum)
+                counter++;
+        }
+        list.remove(list.size() - 1);
+    }
 }
+
