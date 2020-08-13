@@ -33,5 +33,85 @@ Note:
 grid[i][j] is only 0, 1, or 2.
 
  */
+
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+//Store rotten in a queue , count the number of fresh
 public class RottenOranges {
+
+    public static void main(String[] args) {
+        int i = orangesRotting(new int[][]{{0, 2, 2}});
+        System.out.println(i);
+    }
+
+    public static int orangesRotting(int[][] grid) {
+
+        Queue<Pair<Integer, Integer>> rotten = new LinkedList<>();
+        int timeTaken = 0, fresh = 0;
+
+        //Scanning all the oranges, add rotten to queue, count number of fresh oranges
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 2) {
+                    rotten.add(new Pair(i, j));
+                } else if (grid[i][j] == 1) {
+                    fresh++;
+                }
+            }
+        }
+
+        while (!rotten.isEmpty()) {
+
+            int size = rotten.size();
+
+            //convert all rotten's adjacent to rotten
+            for (int i = 0; i < size; i++) {
+                int x = rotten.peek().getFirst();
+                int y = rotten.peek().getSecond();
+                rotten.remove();
+                //top
+                //first condition is to check whether the element is on the grid[0](top)
+                // we can just skip this since top of grid[0] doenst have anything
+                if (x > 0 && grid[x - 1][y] == 1) {
+
+                    grid[x - 1][y] = 2;
+                    rotten.add(new Pair<>(x - 1, y));
+                    fresh--;
+                }
+                ;
+
+                //left
+                if (y > 0 && grid[x][y - 1] == 1) {
+                    grid[x][y - 1] = 2;
+                    rotten.add(new Pair<>(x, y - 1));
+                    fresh--;
+                }
+
+                //bottom
+                if (x < grid.length - 1 && grid[x + 1][y] == 1) {
+                    grid[x + 1][y] = 2;
+                    rotten.add(new Pair<>(x + 1, y));
+                    fresh--;
+                }
+
+                //right
+                if (y < grid[0].length - 1 && grid[x][y + 1] == 1) {
+                    grid[x][y + 1] = 2;
+                    rotten.add(new Pair<>(x, y + 1));
+                    fresh--;
+                }
+            }
+
+            //If its able to contaminate , go for 1 more loop
+            if (!rotten.isEmpty()) {
+                timeTaken++;
+            }
+        }
+
+
+        return fresh == 0 ? timeTaken : -1;
+
+    }
 }
