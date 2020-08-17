@@ -48,6 +48,13 @@ public class ExcelSheetColumnNumber {
             int elementChar = s.charAt(i) - 'A' + 1;
             result += (elementChar * Math.pow(26, count--));
         }
+
+        for (char c:s.toCharArray()
+             ) {
+            System.out.println(c);
+        }
+
+
         return result;
     }
 
