@@ -53,13 +53,19 @@ public class Subsets {
         return result;
     }
 
+    /*
+               0
+             1 | 1
+        2 | 2  |  2 | 2
+     3 3 | 3 3 | 3 3 | 3 3
+     */
     private static void recSubsets(int[] nums, int pos, List<Integer> subSet, List<List<Integer>> result2) {
 
         result2.add(new ArrayList<>(subSet));
         for (int i = pos; i < nums.length; i++) {
             subSet.add(nums[i]);
             recSubsets(nums, i + 1, subSet, result2);
-            //backtracking
+            //backtracking (remove backtrack)
             //  because in line 60 ith element is taken ,so in line 65 to delete that element and proceed forward.
             //                so basically that line use to not consider ith element
             subSet.remove(subSet.size() - 1);
