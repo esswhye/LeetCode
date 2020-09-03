@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LargestTimeForGivenDigits {
 
-
     static int max = -1;
 
     public static void main(String[] args) {
