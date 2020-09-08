@@ -1,7 +1,6 @@
 package septchallenge;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /* 1305
 Given two binary search trees root1 and root2.
@@ -103,6 +102,59 @@ class TreeNode {
     TreeNode(int val) {
         this.val = val;
     }
+
+    void arrayAddBFS(int[] arr, TreeNode node) {
+        for (int i = 0; i < arr.length; i++) {
+            addBFS(arr[i], node);
+        }
+    }
+
+    void printBFSVal(TreeNode node) {
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(node);
+
+        while (!q.isEmpty()) {
+            TreeNode temp = q.peek();
+            System.out.println(temp.val);
+            q.remove();
+            if (temp.left != null) {
+                q.add(temp.left);
+            }
+            if (temp.right != null) {
+                q.add(temp.right);
+            }
+        }
+    }
+
+    void addBFS(int val, TreeNode node) {
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(node);
+
+
+        while (!q.isEmpty()) {
+            TreeNode temp = q.peek();
+            q.remove();
+            if (temp.left != null) {
+                q.add(temp.left);
+            } else {
+                temp.left = new TreeNode(val);
+                break;
+            }
+
+            if (temp.right != null) {
+                q.add(temp.right);
+            } else {
+                temp.right = new TreeNode(val);
+                break;
+            }
+
+        }
+
+
+    }
+
 
     TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
