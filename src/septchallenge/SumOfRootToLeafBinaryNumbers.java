@@ -32,7 +32,7 @@ public class SumOfRootToLeafBinaryNumbers {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
-        root.arrayAddBFS(new int[]{0}, root);
+        root.arrayAddBFS(new int[]{1}, root);
 
         System.out.println(sumRootToLeaf(root));
     }
