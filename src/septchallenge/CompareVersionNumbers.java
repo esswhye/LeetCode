@@ -1,6 +1,7 @@
 package septchallenge;
 
 /**
+ * 165. Compare Version Numbers
  * Compare two version numbers version1 and version2.
  * If version1 > version2 return 1; if version1 < version2 return -1;otherwise return 0.
  * <p>
@@ -43,11 +44,11 @@ public class CompareVersionNumbers {
     public static void main(String[] args) {
 
 
-        System.out.println(compareVersionV2("0.1", "1.1"));
-        System.out.println(compareVersionV2("1.0.1", "1"));
-        System.out.println(compareVersionV2("7.5.2.4", "7.5.3"));
-        System.out.println(compareVersionV2("1.01", "1.001"));
-        System.out.println(compareVersionV2("1.0", "1.0.0"));
+        System.out.println(compareVersionV3("0.1", "1.1"));
+        System.out.println(compareVersionV3("1.0.1", "1"));
+        System.out.println(compareVersionV3("7.5.2.4", "7.5.3"));
+        System.out.println(compareVersionV3("1.01", "1.001"));
+        System.out.println(compareVersionV3("1.0", "1.0.0"));
 
 
     }
@@ -112,10 +113,8 @@ public class CompareVersionNumbers {
         }
 
 
-
         String[] strSplit1 = version1.split("\\.");
         String[] strSplit2 = version2.split("\\.");
-
 
 
         int maxL = Math.max(strSplit1.length, strSplit2.length);
@@ -135,7 +134,6 @@ public class CompareVersionNumbers {
         }
 
 
-
         if (ver1 > ver2) {
             return 1;
         } else if (ver2 > ver1) {
@@ -145,4 +143,33 @@ public class CompareVersionNumbers {
         }
 
     }
+
+    public static int compareVersionV3(String version1, String version2) {
+        String[] strSplit1 = version1.split("\\.");
+        String[] strSplit2 = version2.split("\\.");
+
+        int i = 0;
+        int maxL = Math.max(strSplit1.length, strSplit2.length);
+
+
+        while (i < maxL) {
+
+            if (i < strSplit1.length && i < strSplit2.length) {
+                if (Integer.parseInt(strSplit1[i]) > Integer.parseInt(strSplit2[i])) {
+                    return 1;
+                } else if (Integer.parseInt(strSplit2[i]) > Integer.parseInt(strSplit1[i]))
+                    return -1;
+            } else if (i < strSplit1.length) {
+                if (Integer.parseInt(strSplit1[i]) != 0)
+                    return 1;
+            } else if (i < strSplit2.length)
+                if (Integer.parseInt(strSplit2[i]) != 0)
+                    return -1;
+            i++;
+        }
+
+        return 0;
+
+    }
+
 }
