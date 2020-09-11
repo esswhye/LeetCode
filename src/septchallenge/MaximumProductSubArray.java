@@ -53,15 +53,31 @@ public class MaximumProductSubArray {
         if (nums.length == 1) {
             return nums[0];
         }
-        int max = nums[0], min = nums[0], ans = nums[0];
-        //2, 3, -2, 4
+        // -1, 6 , 2 , 3^(currently at)
+        //prev_max_value = 12
+        //prev_min_value = -12
+        //curr_max_value = (12*3)
+        //curr_min = (-12*3)
+        //Keep track
+        int prevMaxProd = nums[0];
+        int prevMinProd = nums[0];
+        int currMaxProd;
+        int currMinProd;
+        int ans = nums[0];
+
         for (int i = 1; i < nums.length; i++) {
-            //if its less than max take the element nums[i]
-            int tempMax = Math.max(nums[i], Math.max(max * nums[i], min * nums[i]));
-            min = Math.min(nums[i], Math.min(max * nums[i], min * nums[i]));
-            max = tempMax;
-            ans = Math.max(ans, max);
+
+            //Comparing (maxProd ,negativeProd, curr element.
+            // if max prod < curr element we will start "iterating from curr elememt since previous max prod is alr lower than curr
+            currMaxProd = Math.max(nums[i], Math.max(prevMaxProd * nums[i], prevMinProd * nums[i]));
+            currMinProd = Math.min(nums[i], Math.min(prevMaxProd * nums[i], prevMinProd * nums[i]));
+            ans = Math.max(currMaxProd, ans);
+
+            prevMinProd = currMinProd;
+            prevMaxProd = currMaxProd;
         }
+
+
         return ans;
     }
 }
