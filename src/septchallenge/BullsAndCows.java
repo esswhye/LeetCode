@@ -7,17 +7,17 @@ public class BullsAndCows {
 
         //System.out.println(getHint("1807", "7810"));
         //System.out.println(getHint("1123", "0111"));
-        System.out.println(getHintV2("11", "10"));
-        System.out.println(getHintV2("8578605648", "3675352465"));
+        System.out.println(getHint("11", "10"));
+        System.out.println(getHint("8578605648", "3675352465"));
 
     }
 
     public static String getHint(String secret, String guess) {
 
-        //Digits 0-9 add frequency
-        int s[] = new int[9];
+        //Digits 0-9 add frequency buckets
+        int s[] = new int[10];
 
-        int g[] = new int[9];
+        int g[] = new int[10];
 
         int bull = 0;
         int cow = 0;
@@ -25,15 +25,21 @@ public class BullsAndCows {
         for (int i = 0; i < secret.length(); i++) {
             char cs = secret.charAt(i);
             char cg = guess.charAt(i);
+            //Get all same digit same letter and increment
             if (cs == cg) {
                 bull++;
             } else {
+                //count each digit frequency individually
                 s[cs - '0']++;
                 g[cg - '0']++;
             }
         }
 
-        for (int i = 0; i < guess.length(); i++) {
+
+        //Example Frequency S[0] = 2 >>> found digit '0' in secret
+        // G[0] = 3 >>> found 3 digit '0' in guess
+        // if S and G is more than 1 means guess digit was found in secret
+        for (int i = 0; i < s.length; i++) {
             cow += Math.min(s[i], g[i]);
         }
 
