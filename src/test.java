@@ -1,8 +1,9 @@
 public class test {
     public static void main(String[] args) {
         //System.out.println(rec(9));
-        System.out.println(Math.pow(10,2));
-        System.out.println(4%2);
+        //System.out.println(Math.pow(10, 2));
+       // System.out.println(4 % 2);
+        System.out.println(5 ^ 25);
     }
 
     public static int rec(int n) {
