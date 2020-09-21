@@ -27,21 +27,42 @@ public class BestTimetoBuyandSellStock {
         maxProfit(new int[]{7, 1, 5, 3, 6, 4});
     }
 
-
+    //DP
     public static int maxProfit(int[] prices) {
 
         int[] dp = new int[prices.length + 1];
         dp[0] = 0;
-        dp[1] = prices[0];
-        int min = Integer.MAX_VALUE;
+        //dp[1] = prices[0];
+        int max = Integer.MIN_VALUE;
 
         for (int i = 1; i < prices.length; i++) {
 
-             int sell = dp[i-1] - prices[i];
+            int ithProfit = dp[i - 1];
+            int profDiff = prices[i] - prices[i - 1];
+
+            dp[i] = Math.max(0, ithProfit + profDiff);
+            max = Math.max(dp[i], max);
 
         }
 
 
-        return dp[prices.length];
+        return max;
+    }
+
+    //Brute
+    public static int maxProfitV2(int[] prices) {
+
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            } else {
+                max = Math.max(max, prices[i] - min);
+            }
+        }
+
+        return max;
     }
 }
