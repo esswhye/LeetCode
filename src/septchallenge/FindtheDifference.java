@@ -25,25 +25,24 @@ Explanation:
  */
 public class FindtheDifference {
     public static void main(String[] args) {
-        System.out.println(findTheDifferenceV2("abcd", "abcde"));
+        System.out.println(findTheDifference("a", "aa"));
     }
 
     public static char findTheDifference(String s, String t) {
         int[] alphabets = new int[26];
 
-        for (int i = 0; i < s.length(); i++) {
-            alphabets[s.charAt(i) - 'a'] += 1;
+        alphabets[t.charAt(0) - 'a'] -= 1;
+        for (int i = 1; i < t.length(); i++) {
+            alphabets[s.charAt(i - 1) - 'a'] += 1;
+            alphabets[t.charAt(i) - 'a'] -= 1;
         }
 
-        char tempArray[] = t.toCharArray();
-        Arrays.sort(tempArray);
-
-        for (int i = 0; i < tempArray.length; i++) {
-            if (alphabets[tempArray[i] - 'a'] == 0) {
-                System.out.println(tempArray[i]);
-                return tempArray[i];
-            }
+        for (int i = 0; i < alphabets.length; i++) {
+            if (alphabets[i] != 0)
+                return (char) (i + 'a');
         }
+
+
         return ' ';
     }
 
