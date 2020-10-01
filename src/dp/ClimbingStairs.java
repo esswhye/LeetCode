@@ -1,6 +1,8 @@
 package dp;
 
 
+import java.util.*;
+
 //Combinatories
 public class ClimbingStairs {
 
@@ -30,6 +32,12 @@ public class ClimbingStairs {
         System.out.println(climbingStairsV3(9, 2));
         System.out.println(climbStairsKStepsSkipRed(7, 3, new boolean[]{false, true, false, true, true, false, false, false}));
         System.out.println(paidStaircaseV2(3, new int[]{0, 3, 2, 4}));
+        System.out.println(paidStaircaseII(8, new int[]{0, 3, 2, 4, 6, 1, 1, 5, 3}));
+        int[] reverse = reverse(new int[]{1, 2, 3, 4});
+        for (int i : reverse
+        ) {
+            System.out.print(i + " ");
+        }
 
     }
 
@@ -191,11 +199,84 @@ public class ClimbingStairs {
             a = b;
             b = c;
         }
-
         return c;
     }
 
+    /*
+  Problem:
+      Paid Staircase
+
+      You are climbing a paid staircase. It takes n steps to reach to the top and you have to pay p[i] to step on the i-th stair.
+      Each time you can climb 1 or 2 steps.
+      Return the cheapest path to the top of the staircase
+   */
+    public static List<Integer> paidStaircaseII(int n, int[] p) {
+        int[] dp = new int[n + 1];
+        int[] from = new int[n + 1];
+        List<Integer> path = new ArrayList<>();
+        dp[0] = 0;
+        dp[1] = p[1];
+        for (int i = 2; i <= n; i++) {
+            dp[i] = p[i] + Math.min(dp[i - 1], dp[i - 2]);
+            if (dp[i - 1] < dp[i - 2]) {
+                from[i] = i - 1;
+            } else {
+                from[i] = i - 2;
+            }
+        }
+        /*
+        path = []
+        for curr = best_last_state; curr exist; curr = from[curr]
+            path.push(curr)
+         */
+
+        //Last element = n
+        path.add(n);
+        for (int i = n; i > 0; i = from[i]) {
+            path.add(from[i]);
+        }
+
+        //Reverse
+
+
+        Collections.reverse(path);
+
+
+        return path;
+    }
+
+    private static int[] reverse(int[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
+            int temp = array[i];
+            array[i] = array[array.length - i - 1];
+            array[array.length - i - 1] = temp;
+        }
+        return array;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
     getArrayB = john_cut(A)

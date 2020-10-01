@@ -31,7 +31,7 @@ Output: false
  */
 public class WordBreak {
     public static void main(String[] args) {
-        wordBreak("leetcode", Arrays.asList("leet", "code"));
+        System.out.println(wordBreakV2("leetcode", Arrays.asList("leet", "code")));
     }
 
     //DP
@@ -62,5 +62,23 @@ public class WordBreak {
         }
         System.out.println(dp[n]);
         return dp[n];
+    }
+
+    //Recursion O(n^2)
+    public static boolean wordBreakV2(String s, List<String> wordDict) {
+        int len = s.length();
+
+        //Base case
+        if (len == 0) {
+            return true;
+        }
+
+        for (int i = 1; i <= len; i++) {
+            if (wordDict.contains(s.substring(0, i)) && wordBreakV2(s.substring(i, len), wordDict)) {
+
+                return true;
+            }
+        }
+        return false;
     }
 }
