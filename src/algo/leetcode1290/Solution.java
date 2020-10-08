@@ -1,10 +1,11 @@
 package algo.leetcode1290;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
+ * int val;
+ * ListNode next;
+ * ListNode(int x) { val = x; }
  * }
  */
 
@@ -28,23 +29,25 @@ public class Solution {
 
     public static int getDecimalValue(ListNode head) {
 
-        String concatValue="";
-        return Integer.parseInt(recursionList(head,concatValue),2);
+        String concatValue = "";
+        return Integer.parseInt(recursionList(head, concatValue), 2);
 
     }
 
-    public static String recursionList(ListNode head, String concatValue)
-    {
+    public static String recursionList(ListNode head, String concatValue) {
         concatValue += String.valueOf(head.val);
-        if(head.next == null)
-        {
+        if (head.next == null) {
             return concatValue;
         }
         return recursionList(head.next, concatValue);
     }
 }
+
 class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-  }
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+    }
+}
