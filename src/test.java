@@ -7,6 +7,7 @@ public class test {
         String hello = "GGAG";
         long occ = hello.chars().filter(ch -> ch == 'G').count();
         System.out.println(22 % 4);
+        System.out.println(10 % 7);
 
     }
 
