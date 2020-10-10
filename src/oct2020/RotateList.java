@@ -26,8 +26,56 @@ public class RotateList {
     public static void main(String[] args) {
 
         ListNode listNode = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        ListNode listNode2 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+
         rotateRight(listNode, 2);
+
+       // ListNode result = swapPairsV2(listNode2);
+        ListNode result2 = swapPairs(listNode2);
+        System.out.println();
     }
+
+    public static ListNode swapPairs(ListNode head) {
+        ListNode helper = helper(head);
+        return helper;
+
+    }
+
+    public static ListNode helper(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        ListNode back = null;
+        if (head.next.next != null) {
+            back = head.next.next;
+        }
+        ListNode front = head;
+        head = head.next;
+        head.next = front;
+        head.next.next = back;
+        head.next.next = helper(head.next.next);
+
+        return head;
+    }
+
+
+    public static ListNode swapPairsV2(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == null) {
+            return head;
+        }
+
+        ListNode temp = head.next; // 2 , 3 ,4
+        head.next = head.next.next; //1, 3, 4
+        temp.next = head; // 2,1,3,4
+        head = temp; //
+        head.next.next = swapPairs(head.next.next);
+        return head;
+    }
+
 
     public static ListNode rotateRight(ListNode head, int k) {
 

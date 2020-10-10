@@ -3,11 +3,12 @@ public class test {
         //System.out.println(rec(9));
         //System.out.println(Math.pow(10, 2));
         // System.out.println(4 % 2);
-        System.out.println(5 ^ 25);
-        String hello = "GGAG";
-        long occ = hello.chars().filter(ch -> ch == 'G').count();
-        System.out.println(22 % 4);
-        System.out.println(10 % 7);
+//        System.out.println(5 ^ 25);
+//        String hello = "GGAG";
+//        long occ = hello.chars().filter(ch -> ch == 'G').count();
+//        System.out.println(22 % 4);
+//        System.out.println(10 % 7);
+        reverseString(new char[]{'h', 'e', 'l', 'l', 'o'});
 
     }
 
@@ -42,5 +43,16 @@ public class test {
             }
         }
         return "no";
+    }
+
+    public static void reverseString(char[] s) {
+
+        for (int i = 0; i < s.length / 2; i++) {
+            char temp = s[i];
+            s[i] = s[(s.length - 1) - i];
+            s[(s.length - 1) - i] = temp;
+
+        }
+        System.out.println(s);
     }
 }

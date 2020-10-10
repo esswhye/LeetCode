@@ -3,6 +3,7 @@ package oct2020;
 import java.util.Arrays;
 
 /*
+//Interval
 [[1,4],[3,6],[2,8]]
 [[1,4],[2,3]]
 [[0,10],[5,12]]
