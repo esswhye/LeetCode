@@ -40,13 +40,19 @@ public class BinarySearch {
 
     private static int binarySearch(int[] nums, int l, int r, int target) {
 
-        if (l <= r) {
-            int mid = (l + r) / 2;
+        int left = l;
+        int right = r;
 
-            if (nums[mid] == target) {
+        if (left <= right) {
+
+            int mid = (left + right) / 2;
+            int midNo = nums[mid];
+
+
+            if (midNo == target) {
                 return mid;
             }
-            if (target < nums[mid]) {
+            if (target < midNo) {
                 return binarySearch(nums, l, mid - 1, target);
             }
             return binarySearch(nums, mid + 1, r, target);
