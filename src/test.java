@@ -10,6 +10,20 @@ public class test {
 //        System.out.println(10 % 7);
         reverseString(new char[]{'h', 'e', 'l', 'l', 'o'});
 
+        A a = new C();
+        a.hello();
+        B b = new C();
+        b.bye();
+        C c = new C();
+        c.hello();
+        c.bye();
+
+        Shape shape = new Circle();
+        shape.draw();
+
+        Circle circle = new Circle();
+        circle.draw();
+
     }
 
     public static int rec(int n) {
@@ -56,3 +70,51 @@ public class test {
         System.out.println(s);
     }
 }
+
+
+interface A {
+    final int x = 0;
+
+    void hello();
+
+    void hello(int hi);
+}
+
+interface B {
+    void bye();
+}
+
+class C implements A, B {
+
+    @Override
+    public void hello() {
+        System.out.println("hello");
+    }
+
+    @Override
+    public void hello(int hi) {
+
+    }
+
+    @Override
+    public void bye() {
+        System.out.println("bye");
+    }
+}
+
+class Shape {
+
+    void draw() {
+        System.out.println("shape");
+    }
+}
+
+class Circle extends Shape {
+
+    void draw() {
+        System.out.println("Circle");
+    }
+}
+
+
+

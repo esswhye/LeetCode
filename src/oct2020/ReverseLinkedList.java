@@ -28,6 +28,20 @@ public class ReverseLinkedList {
 
         ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
         listNode2 = reverseLinkedList.reverse(listNode2);
+
+        Hello hello = new bye();
+        hello.hello();
+
+        ((bye) hello).say();
+
+        int i = 0;
+
+        System.out.println(10 + (20 + "HAVA"));
+        System.out.println(i++);
+
+
+
+
     }
 
     public ListNode reverse(ListNode head) {
@@ -38,7 +52,9 @@ public class ReverseLinkedList {
         while (head != null) {
             //pointer
             ListNode nextNode = head.next;
-            //Head =  1 x 2 , 3 , 4 ...
+            //Head.next =  1 x 2 , 3 , 4 ...
+            //Head.next = 1 -> null
+            //Head.next = 2 pointing to 1(prev)
             head.next = prev;
 
             //prev = 1.
@@ -47,7 +63,27 @@ public class ReverseLinkedList {
             // 1,3,4,5
             head = nextNode;
         }
-
         return prev;
+    }
+}
+
+interface Hello {
+    final int data = 0;
+
+    void hello();
+}
+
+class bye implements Hello {
+    public bye() {
+
+    }
+
+    public void say() {
+        System.out.println("say");
+    }
+
+    @Override
+    public void hello() {
+        System.out.println("hello");
     }
 }
