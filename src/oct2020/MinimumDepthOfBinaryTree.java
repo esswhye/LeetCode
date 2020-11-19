@@ -13,28 +13,37 @@ public class MinimumDepthOfBinaryTree {
         if (root == null) {
             return 0;
         }
-
-        int minDepth = 0;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(root, 1));
 
         while (!queue.isEmpty()) {
 
-            TreeNode tempNode = queue.poll();
-            minDepth++;
-
-            if (tempNode.left != null) {
-                queue.add(tempNode.left);
+            Pair pair = queue.poll();
+            int depth = pair.depth;
+            TreeNode node = pair.node;
+            if (node.left == null && node.right == null) {
+                return depth;
+            }
+            if (node.left != null) {
+                queue.add(new Pair(node.left, depth + 1));
             }
 
-            if (tempNode.right != null) {
-                queue.add(tempNode.right);
+            if (node.right != null) {
+                queue.add(new Pair(node.right, depth + 1));
             }
 
         }
+        return 0;
 
+    }
+}
 
-        return minDepth;
+class Pair {
+    TreeNode node;
+    int depth;
 
+    public Pair(TreeNode node, int depth) {
+        this.node = node;
+        this.depth = depth;
     }
 }
