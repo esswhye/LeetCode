@@ -1,6 +1,5 @@
 package dec2020;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import java.util.Map;
 //1010. Pairs of Songs With Total Durations Divisible by 60
 public class PairsOfSongWithTotalDurationsDivisible {
     public static void main(String[] args) {
-
+        
     }
 
     public int numPairsDivisibleBy60(int[] time) {
